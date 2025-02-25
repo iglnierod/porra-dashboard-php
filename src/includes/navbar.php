@@ -13,10 +13,10 @@
           <a class="nav-link fs-5" href="../views/users.php">Usarios</a>
         </li>
         <li class="nav-item">
-          <a href="../views/matchday.php" class="nav-link fs-5">Jornadas</a>
+          <a class="nav-link fs-5" href="../views/matchday.php">Jornadas</a>
         </li>
         <li class="nav-item">
-          <a href="../views/match.php" class="nav-link fs-5">Partidos</a>
+          <a class="nav-link fs-5" href="../views/match/index.php">Partidos</a>
         </li>
       </ul>
     </div>

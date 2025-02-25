@@ -1,7 +1,8 @@
 <?php
-include("../includes/head.php");
-include("../includes/navbar.php");
-include("../functions/match.php");
+include("../../includes/head.php");
+include("../../includes/navbar.php");
+include("../../database.php");
+include("../../functions/match.php");
 
 if (isset($_GET["matchday_id"])) {
   $matchdayId = is_numeric($_GET["matchday_id"]) ? (int)$_GET["matchday_id"] : null;
@@ -17,7 +18,7 @@ if (isset($_GET["matchday_id"])) {
     <div class="col-md-4">
       <div class="card p-4">
         <h4 class="text-center mb-3">Buscar Partidos</h4>
-        <form action="match.php" method="GET">
+        <form action="index.php" method="GET">
           <div class="mb-3">
             <input type="number" name="matchday_id" class="form-control" placeholder="Matchday ID" min="0" max="100" required>
           </div>
@@ -43,6 +44,7 @@ if (isset($_GET["matchday_id"])) {
                 <th>V. Goles</th>
                 <th>Equipo Visitante</th>
                 <th>ID Jornada</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -55,15 +57,20 @@ if (isset($_GET["matchday_id"])) {
                     <td><?= $match["away_goals"] ?></td>
                     <td><?= $match["away_team"] ?></td>
                     <td><?= $match["matchday_id"] ?></td>
+                    <td>
+                      <a title="Editar" href="edit_match.php?match_id=<?= $match["match_id"] ?>" class="btn btn-outline-secondary"><i class="bi bi-pencil-square"></i></a>
+                      <a title="Eliminar" href="#" class="btn btn-outline-danger"><i class="bi bi-x-square"></i></a>
+
+                    </td>
                   </tr>
                 <?php endforeach;
               } else { ?>
                 <tr>
-                  <td colspan="6" class="text-muted">No hay partidos disponibles</td>
+                  <td colspan="7" class="text-muted">No hay partidos disponibles</td>
                 </tr>
               <?php } ?>
               <tr>
-                <td colspan="6" class=""><a href="#" class="btn btn-primary">Añadir partido</a></td>
+                <td colspan="7" class=""><a href="#" class="btn btn-primary">Añadir partido</a></td>
               </tr>
             </tbody>
           </table>
@@ -73,4 +80,4 @@ if (isset($_GET["matchday_id"])) {
   </div>
 </div>
 
-<?php include("../includes/footer.php"); ?>
+<?php include("../../includes/footer.php"); ?>

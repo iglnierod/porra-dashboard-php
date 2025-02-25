@@ -1,14 +1,14 @@
 <?php
-require("../database.php");
+require_once "../../database.php";
 
 function getMatchesView()
 {
-  return supabaseRequest("match_view", "GET");
+  return supabaseRequest("match_view?order=match_id.asc", "GET");
 }
 
 function getMatchesViewByMatchdayId($matchdayId)
 {
-  return supabaseRequest("match_view?matchday_id=eq.$matchdayId", "GET");
+  return supabaseRequest("match_view?matchday_id=eq.$matchdayId&order=match_id.asc", "GET");
 }
 
 function getMatches()
