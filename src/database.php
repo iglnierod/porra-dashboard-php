@@ -34,10 +34,5 @@ function supabaseRequest($endpoint, $method = "GET", $data = null)
 
   return json_decode($response, true);
 }
-
-function getMatches()
-{
-  return supabaseRequest("match_view", "GET");
-}
 ?>
 <h1></h1>
