@@ -21,6 +21,19 @@ function getMatchById($id)
   return supabaseRequest("match?id=eq.$id", "GET");
 }
 
+function addMatch($idLocal, $idAway, $matchdayId)
+{
+  $data = [
+    "id_local" => $idLocal,
+    "id_away" => $idAway,
+    "local_goals" => 0,
+    "away_goals" => 0,
+    "matchday_id" => $matchdayId
+  ];
+
+  return supabaseRequest("match", "POST", $data);
+}
+
 function updateMatch($id, $idLocal, $idAway, $localGoals, $awayGoals, $matchdayId)
 {
   $data = [

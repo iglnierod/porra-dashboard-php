@@ -59,8 +59,11 @@ if (isset($_GET["matchday_id"])) {
                     <td><?= $match["matchday_id"] ?></td>
                     <td>
                       <a title="Editar" href="edit_match.php?match_id=<?= $match["match_id"] ?>" class="btn btn-outline-secondary"><i class="bi bi-pencil-square"></i></a>
-                      <a title="Eliminar" href="#" class="btn btn-outline-danger"><i class="bi bi-x-square"></i></a>
-
+                      <a title="Eliminar" href="delete_match.php?match_id=<?= $match["match_id"] ?>&matchday_id=<?= $matchdayId ?>"
+                        class="btn btn-outline-danger"
+                        onclick="return confirm('¿Estás seguro de que quieres eliminar este partido?');">
+                        <i class="bi bi-x-square"></i>
+                      </a>
                     </td>
                   </tr>
                 <?php endforeach;
@@ -70,7 +73,9 @@ if (isset($_GET["matchday_id"])) {
                 </tr>
               <?php } ?>
               <tr>
-                <td colspan="7" class=""><a href="#" class="btn btn-primary">Añadir partido</a></td>
+                <td colspan="7">
+                  <a href="add_match.php?matchday_id=<?= isset($matchdayId) ? $matchdayId : '' ?>" class="btn btn-primary">Añadir partido</a>
+                </td>
               </tr>
             </tbody>
           </table>

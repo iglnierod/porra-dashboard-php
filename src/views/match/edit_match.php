@@ -14,7 +14,7 @@ if (isset($_POST["editMatch"])) {
   $editMatchdayId = $_POST["matchdayId"];
 
   $updatedMatch = updateMatch($editMatchId, $editLocalId, $editAwayId, $editLocalGoals, $editAwayGoals, $editMatchdayId);
-  echo "<pre>";
+  echo "<pre> ASD";
   print_r($updatedMatch);
   echo "</pre>";
 }

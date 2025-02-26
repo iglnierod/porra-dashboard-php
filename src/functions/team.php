@@ -3,7 +3,7 @@ require_once "../../database.php";
 
 function getTeams()
 {
-  return supabaseRequest("team", "GET");
+  return supabaseRequest("team?order=name.asc", "GET");
 }
 
 function getTeamById($id)
