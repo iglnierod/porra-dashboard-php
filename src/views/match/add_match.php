@@ -11,10 +11,15 @@ if (isset($_POST["addMatch"])) {
   $addMatchdayId = $_POST["matchday"];
   $addLocalTeamId = $_POST["localTeam"];
   $addAwayTeamId = $_POST["awayTeam"];
+  if (empty($addLocalTeamId) || empty($addAwayTeamId)) {
+    throw new Exception("Error: No se ha seleccionado alguno de los equipos.");
+    exit();
+  }
   if ($addLocalTeamId !== $addAwayTeamId) {
     addMatch($addLocalTeamId, $addAwayTeamId, $addMatchdayId);
   } else {
-    throw new Exception("Error: El equipo local y el equipo visitante son el mismo equipo.");
+    throw new Exception("Error: El equipo local y el equipo visitante son el mismo equipo. LOCAL: $addLocalTeamId VISTANTE: $addAwayTeamId");
+    exit();
   }
   header("Location: index.php?matchday_id=$addMatchdayId");
   exit();
@@ -35,7 +40,7 @@ $teams = getTeams();
     <!-- MATCHDAY SELECT -->
     <div class="mb-3">
       <label for="matchday" class="form-label">Jornada</label>
-      <select name="matchday" id="matchday" class="form-select">
+      <select name="matchday" id="matchday" class="form-select" required>
         <option value="-1" disabled selected>Seleccionar jornada</option>
         <?php foreach ($matchdays as $matchday): ?>
           <option value="<?= $matchday["id"] ?>"
@@ -51,7 +56,7 @@ $teams = getTeams();
       <!-- LOCAL TEAM SELECT -->
       <div class="w-45">
         <label for="localTeam" class="form-label">Equipo Local</label>
-        <select name="localTeam" id="localTeam" class="form-select">
+        <select name="localTeam" id="localTeam" class="form-select" required>
           <option value="-1" disabled selected>Seleccionar Equipo Local</option>
           <?php foreach ($teams as $team): ?>
             <option value="<?= $team["id"] ?>"><?= htmlspecialchars($team["name"]) ?></option>
@@ -62,7 +67,7 @@ $teams = getTeams();
       <!-- AWAY TEAM SELECT -->
       <div class="w-45">
         <label for="awayTeam" class="form-label">Equipo Visitante</label>
-        <select name="awayTeam" id="awayTeam" class="form-select">
+        <select name="awayTeam" id="awayTeam" class="form-select" required>
           <option value="-1" disabled selected>Seleccionar Equipo Visitante</option>
           <?php foreach ($teams as $team): ?>
             <option value="<?= $team["id"] ?>"><?= htmlspecialchars($team["name"]) ?></option>

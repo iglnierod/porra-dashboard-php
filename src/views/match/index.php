@@ -3,6 +3,7 @@ include("../../includes/head.php");
 include("../../includes/navbar.php");
 include("../../database.php");
 include("../../functions/match.php");
+include("../../functions/matchday.php");
 
 if (isset($_GET["matchday_id"])) {
   $matchdayId = is_numeric($_GET["matchday_id"]) ? (int)$_GET["matchday_id"] : null;
@@ -10,6 +11,8 @@ if (isset($_GET["matchday_id"])) {
     $matches = getMatchesViewByMatchdayId($_GET["matchday_id"]);
   }
 }
+
+$matchdays = getMatchdays();
 ?>
 
 <div class="container mt-4">
@@ -20,7 +23,16 @@ if (isset($_GET["matchday_id"])) {
         <h4 class="text-center mb-3">Buscar Partidos</h4>
         <form action="index.php" method="GET">
           <div class="mb-3">
-            <input type="number" name="matchday_id" class="form-control" placeholder="Matchday ID" min="0" max="100" required>
+            <!-- <input type="number" name="matchday_id" class="form-control" placeholder="Matchday ID" min="0" max="100" required> -->
+            <select name="matchday_id" class="form-select">
+              <option value="-1" selected disabled>Seleccionar Jornada</option>
+              <?php foreach ($matchdays as $matchday): ?>
+                <option value="<?= $matchday["id"] ?>"
+                  <?= (isset($matchdayId) && $matchday["id"] == $matchdayId) ? 'selected' : '' ?>>
+                  <?= htmlspecialchars($matchday["name"]) ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
           </div>
           <div class="d-grid">
             <input type="submit" class="btn btn-success" value="Buscar">
