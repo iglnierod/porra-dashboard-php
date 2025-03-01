@@ -5,17 +5,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: mi-app-php-apache # Nombre opcional para la imagen
+    image: mi-app-php-apache
     ports:
-      - "80:80" # Mapeamos el puerto 80 del contenedor al 8080 del host
+      - "80:80"
     volumes:
-      - ./src:/var/www/html # Montamos la carpeta src como el raíz de Apache
+      - ./src:/var/www/html
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
       - DB_URL=${DB_URL}
       - DB_APIKEY=${DB_APIKEY}
-
-    command: >
-      bash -c "chown -R www-data:www-data /var/www/html
-      && chmod -R 755 /var/www/html
-      && apache2-foreground"

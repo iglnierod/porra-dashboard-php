@@ -11,6 +11,15 @@ function getMatchdayById($id)
   return supabaseRequest("matchday?id=eq.$id", "GET");
 }
 
+function addMatchday($name, $status)
+{
+  $data = [
+    "name" => $name,
+    "status" => $status
+  ];
+  return supabaseRequest("matchday", "POST", $data);
+}
+
 function updateMatchday($id, $name, $status)
 {
   $data = [
