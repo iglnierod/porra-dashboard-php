@@ -33,9 +33,9 @@ $matchdays = getMatchdays();
                     <td>
                       <a title="Ver partidos" href="../match/index.php?matchday_id=<?= $matchday["id"] ?>" class="btn btn-outline-info"><i class="bi bi-arrow-up-right-square"></i></a>
                       <a title="Editar" href="edit_matchday.php?matchday_id=<?= $matchday["id"] ?>" class="btn btn-outline-secondary"><i class="bi bi-pencil-square"></i></a>
-                      <a title="Eliminar" href="delete_match.php?match_id=<?= $match["match_id"] ?>&matchday_id=<?= $matchdayId ?>"
+                      <a title="Eliminar" href="delete_matchday.php?matchday_id=<?= $matchday["id"] ?>"
                         class="btn btn-outline-danger"
-                        onclick="return confirm('¿Estás seguro de que quieres eliminar este partido?');">
+                        onclick="return confirm('¿Estás seguro de que quieres eliminar esta jornada: <?= $matchday['name'] ?>?');">
                         <i class="bi bi-x-square"></i>
                       </a>
                     </td>
