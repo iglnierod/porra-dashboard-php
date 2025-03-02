@@ -27,7 +27,7 @@ function updateMatchday($id, $name, $status)
     "status" => $status,
   ];
 
-  return supabaseRequest("matchday?id.eq=$id", "PATCH", $data);
+  return supabaseRequest("matchday?id=eq.$id", "PATCH", $data);
 }
 
 function deleteMatchday($id)

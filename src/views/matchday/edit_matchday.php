@@ -15,16 +15,15 @@ if (isset($_POST["editMatchday"])) {
   }
 
   $updatedMatchday = updateMatchday($editId, $editName, $editStatus);
+
+  header("Location: index.php");
+  exit();
 }
 
 if (isset($_GET["matchday_id"])) {
   $matchdayId = $_GET["matchday_id"];
   $matchday = getMatchdayById($matchdayId)[0];
 }
-
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
 ?>
 
 <div class="d-flex flex-column align-items-center mt-5">
