@@ -70,6 +70,7 @@ $matchdays = getMatchdays();
                     <td><?= $match["away_team"] ?></td>
                     <td><?= $match["matchday_id"] ?></td>
                     <td>
+                      <a title="Calcular puntos" href="calculate_match.php?match_id=<?= $match["match_id"] ?>" class="btn btn-outline-success"><i class="bi bi-award"></i></a>
                       <a title="Editar" href="edit_match.php?match_id=<?= $match["match_id"] ?>" class="btn btn-outline-secondary"><i class="bi bi-pencil-square"></i></a>
                       <a title="Eliminar" href="delete_match.php?match_id=<?= $match["match_id"] ?>&matchday_id=<?= $matchdayId ?>"
                         class="btn btn-outline-danger"

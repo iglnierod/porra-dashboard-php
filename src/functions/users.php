@@ -1,5 +1,5 @@
 <?php
-require_once '../database.php';
+require_once '../../database.php';
 
 // Obtener todos los usuarios
 function getUsers()
@@ -31,4 +31,39 @@ function updateUser($id, $name, $image_url, $points)
 function deleteUser($id)
 {
   return supabaseRequest("users?id=eq.$id", "DELETE");
+}
+function addPointsToUsers($predictions, $match)
+{
+  // Verificar que `$predictions` sea un array antes de iterar
+  if (!is_array($predictions)) {
+    return false;
+  }
+
+  foreach ($predictions as $prediction) {
+    $userId = $prediction["user_id"];
+    $points = calculatePredictionPoints($match, $prediction);
+
+    // Obtener los puntos actuales del usuario
+    $user = getUserById($userId);
+    if (!isset($user["points"])) {
+      echo "<pre>Error: No se encontraron puntos para el usuario $userId.</pre>";
+      continue;
+    }
+
+    $newPoints = $user["points"] + $points;
+
+    updateUserPoints($userId, $newPoints);
+  }
+
+  return true;
+}
+
+
+function updateUserPoints($userId, $newPoints)
+{
+  $data = [
+    "points" => $newPoints
+  ];
+
+  return supabaseRequest("users?id=eq.$userId", "PATCH", $data);
 }
